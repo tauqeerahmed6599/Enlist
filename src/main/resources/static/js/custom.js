@@ -15,6 +15,25 @@
     //     Reset();
     // }
 
+    // Left side bar Active action Start
+
+
+    // var header = document.getElementById("accordionSidebar");
+    // var btns = header.getElementsByClassName("nav-item");
+    // for (var i = 0; i < nav-item.length; i++) {
+    //     nav-item[i].addEventListener("click", function() {
+    //         var current = document.getElementsByClassName("active");
+    //         current[0].className = current[0].className.replace(" active", "");
+    //         this.className += " active";
+    //     });
+    // }
+
+
+    // $('.nav-item').on('click', function() {
+    //     $(this).addClass('active').siblings('li').removeClass('active');
+    //   });
+
+    // Left side bar Active action  End
 
 
     // Toggle the side navigation
@@ -123,6 +142,7 @@
             a.click();
 
 
+
         }
     }
 
@@ -145,6 +165,7 @@
     tableDropdownEls.forEach((el, index) => {
         tableTexts[index].innerHTML = el.value
     })
+
 
     editBtn.addEventListener('click', function() {
         backdrop.style.zIndex = "1"
@@ -175,6 +196,7 @@
     })
 
     // candidate profile page edit button functionality end 
+
 
 
 })(jQuery); // End of use strict

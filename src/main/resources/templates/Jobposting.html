@@ -10,7 +10,13 @@
     <meta name="author" content="">
 
     <link rel="icon" type="image/x-icon" href="images/tab.png">
-    <title>Enlist - EditPage</title>
+    <title>Enlist - JobPosting</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,39 +25,6 @@
     <link href="css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/styles.css" rel="stylesheet">
-    
-    <script>
-    function addToDatabase(){
-    	var data={}
-    	
-    	data["jobtitle"]=$(".jobtitle").val();
-    	data["domain"]=$(".domain").val();
-    	data["jobtype"]=$(".jobtype").val();
-    	data["exprange"]=$(".exprange").val();
-    	data["salaryrange"]=$(".salaryrange").val();
-    	data["openpositions"]=$(".openpositions").val();
-    	data["joiningdate"]=$(".joiningdate").val();
-    	data["jobdesc"]=$(".jobdesc").val();
-    	data["assignedby"]=$(".assignedby").val();
-    	data["clientname"]=$(".clientname").val();
-    	data["jobresponsibilities"]=$(".jobresponsibilities").val();
-    	data["benefits"]=$(".benefits").val();
-    	
-    	$.ajax({
-    		url:"/job",
-    		contentType: "application/json",
-    		data: JSON.stringify(data),
-    		type: "post",
-    		success: function(data){
-    			alert("Added Successfully");
-    			window.location.href= '/JobInputScreen';
-    		},
-    		error: function(data){
-    			alert('error', e);
-    		}
-    	});
-    }
-    </script>
 
 </head>
 
@@ -100,7 +73,6 @@
             <div class="sidebar-heading">
                 Recruitment
             </div>
-
             <!-- Nav Item -->
             <li class="nav-item">
                 <a class="nav-link" href="./index">
@@ -108,7 +80,7 @@
                     <span>Job Indent</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./CandidateDisplayScreen">
+                <a class="nav-link" href="./CandidatesDisplayScreen">
                     <i class="fas fa-user-alt"></i>
                     <span>Candidates</span></a>
             </li>
@@ -276,149 +248,134 @@
                                 </a>
                             </div>
                         </li>
+
                     </ul>
+
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Content Row -->
-                    <div class="row">
-                        <form>
-                            <div class="row">
-                                <div class="col-lg-6 pr-lg-4">
-                                    <div class="mb-3">
-                                        <label for="email">Job Title </label>
-                                        <input type="text" class="form-control jobtitle" id="email" placeholder="Java Developer">
-                                        <div class="invalid-feedback">
-                                            Please enter the title
-                                        </div>
-                                    </div>
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                      Employee can work remotely
-                                    </label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="domain">Domain</label>
-                                            <input type="text" class="form-control domain" id="domain" placeholder="Development"  required="">
-                                            <div class="invalid-feedback">
-                                                Valid Department is required.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Job type</label>
-                                                <select class="form-select" aria-label="Default select example">
-                                                     <option selected>-</option>
-                                                     <option value="Part-time">Part-Time</option>
-                                                     <option value="Full-time">Full-Time</option>
-                                                </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="experience">Experience Level</label>
-                                            <input type="text" class="form-control exprange" id="experience" placeholder="Mid Level"  required="">
-                                            <div class="invalid-feedback">
-                                                Valid Experience is required.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="jobtype">Salary Range</label>
-                                            <div class="d-flex align-content-center justify-content-center">
-                                                <input type="text" class="form-control" id="jobtype" placeholder="" value="">
-                                                <span class="mx-lg-2 d-flex align-items-center">to</span>
-                                                <input type="text" class="form-control" id="jobtype" placeholder="" value="">
-                                                <span class="d-flex align-items-center pl-2">LPA</span>
-                                            </div>
-                                            
 
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="positions">No of Positions</label>
-                                            <input type="text" class="form-control openpositions" id="positions" placeholder="no of positions"  required="">
-                                        </div>
-                                         <!--  <div class="col-md-6 mb-3">
-                                            <label for="joining">Date of joining</label>
-                                            <div class="input-group date" id="datepicker">
-                                                <input type="text" class="form-control joiningdate" id="date" />
-                                                <span class="input-group-append">
-                                                    <span class="input-group-text bg-light d-block">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
-                                                </span>
-                                            </div>
-
-                                        </div> -->
-                                       <div class="col-md-6 mb-3">
-                                          <label for="joining">Date of joining</label>
-                                            <div class="input-group" id="joining">
-                                                <input type="date" title="Click on the icon" class="form-control w-100 joiningdate" id="joining-date">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="desc">Description</label>
-                                        <textarea class="form-control jobdesc" id="desc" rows="5"></textarea>
-                                    </div>
-                                    <span><a href="./jobdescription" class="text-decoration-none text-dark">Choose from template -></a></span>
-
+                    <div class="container">
+                        <div class="row border bg-body px-3 rounded-3 w-75">
+                            <div class="col-5">
+                                <div class="my-3">
+                                    <label class="m-0 jobposting_topbody_label">Development</label>
+                                    <h5 class="jobposting_topbody_content">Java Developer</h5>
                                 </div>
-                                <div class="col-lg-6 px-lg-5">
-
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="mb-3">
-                                                <label>Assign to</label>
-                                                <select class="form-select assignedby" aria-label="Default select example">
-                                                     <option selected>Choose</option>
-                                                     <option value="Sai Babu">Sai Babu</option>
-                                                     <option value="Rashmi">Rashmi</option>
-                                                     <option value="Prakash">Prakash</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <!-- <label for="new-client">Client</label>
-                                            <input type="text" class="form-control" id="new-client" placeholder="Name of Client" required=""> -->
-                                            <div class="mb-3">
-                                                <label>Client</label>
-                                                <select class="form-select clientname" aria-label="Default select example">
-                                                     <option selected>Choose</option>
-                                                     <option value="Adobe">Adobe</option>
-                                                     <option value="JK Tyres">JK Tyres</option>
-                                                     <option value="Accion labs">Accion labs</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                <div class="my-4">
+                                    <label class="m-0 jobposting_topbody_label">Job Type</label>
+                                    <h5 class="jobposting_topbody_content">Full-Time</h5>
+                                </div>
+                                <div class="my-4">
+                                    <label class="m-0 jobposting_topbody_label">Work type</label>
+                                    <h5 class="jobposting_topbody_content">Remote</h5>
+                                </div>
+                                <div class="my-4">
+                                    <label class="m-0 jobposting_topbody_label">Experience</label>
+                                    <h5 class="jobposting_topbody_content">Fresher - 2 Years</h5>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="my-3 d-flex align-items-center">
+                                    <div class="date_of_joining">
+                                        <label class="m-0 jobposting_topbody_label">Date of joining</label>
+                                        <h5 class="jobposting_topbody_content">12-03-2022</h5>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="responsibility">Job Responsibilities</label>
-                                        <textarea class="form-control jobresponsibilities" id="responsibility" rows="5"></textarea>
+                                    <div class="download-icon">
+                                        <a href="" class="text-decoration-none text-dark"><i class="fa-solid fa-download"></i></a>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="benefits">Benefits</label>
-                                        <textarea class="form-control benefits" id="benefits" rows="2"></textarea>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <button class="btn btn-primary px-3 py-2" onclick="addToDatabase();" px->SAVE</button>
-                                        </div>
-                                        <div class="col-lg-6  d-flex align-content-lg-center justify-content-end">
-                                            <span class="d-flex align-items-end"><a href="#" class="text-decoration-none text-dark">Post in other job portal -></a></span>
-                                        </div>
+                                </div>
+                                <div class="my-3">
+                                    <label class="m-0 jobposting_topbody_label">No of Positions</label>
+                                    <h5 class="jobposting_topbody_content">100</h5>
+                                </div>
+                                <div class="my-3">
+                                    <label class="m-0 jobposting_topbody_label">Job description</label>
+                                    <p class="jobposting_topbody_content">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae. At nos hinc posthac.</p>
+                                </div>
 
+                            </div>
+                        </div>
+                        <div class="social_postings">
+                            <h3>Social Postins</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="images/dp1.png" alt="Dizitalpods">
+                                        </div>
+                                        <!-- <div class="md-form md-outline input-with-post-icon datepicker" id="accLabels">
+                                            <input placeholder="Select date" type="text" id="accessibility-example" class="form-control">
+                                            <label for="accessibility-example">Try me...</label>
+                                            <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                                        </div> -->
+                                        <div class="addingsection text-center mt-2">
+                                            <button id="addsection" class="border-0 bg-body "><i class="fa-solid fa-circle-plus fs-4"></i></button>
+                                        </div>
+                                        <div id="add-date">
+                                            <!-- <div class="input-group date" id="datepicker">
+                                                <input type="text" class="form-control" id="date" />
+                                                <span class="input-group-append">
+                                                <span class="input-group-text bg-light d-block">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                </span>
+                                            </div> -->
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="images/linkedin1.png" alt="LinkedIn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="images/naukri1.png" alt="Naukri">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="images/insta1.png" alt="Instagram">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl col-md-6 mb-4 card-wrap">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="my-3">
+                                            <img src="images/fb1.png" alt="Facebook">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="1 m-1" style="width: 18%;border: 1px solid red; height: 50px;"></div>
+                            <div class="1 m-1" style="width: 20%;border: 1px solid red; height: 50px;"></div>
+                            <div class="1 m-1" style="width: 18%;border: 1px solid red; height: 50px;"></div>
+                            <div class="1 m-1" style="width: 20%;border: 1px solid red; height: 50px;"></div>
+                            <div class="1 m-1" style="width: 18%;border: 1px solid red; height: 50px;"></div>
+                        </div> -->
                     </div>
 
                 </div>
@@ -477,6 +434,29 @@
     <!-- Custom scripts for all pages-->
    <!--  <script src="js/custom.js"></script> -->
 
+
+
 </body>
 
 </html>
+
+
+
+<!-- <div class="row no-gutters align-items-center">
+                                                        <div class="flow position-absolute d-lg-flex justify-content-end align-content-center ">
+                                                            <a href="#" class="edit-profile  "><i class="fa-solid fa-pen"></i></a>
+                                                        </div>
+                                                        <div class="image-section">
+                                                            <img src="images/linkedin.png" alt="Linked-In" width="100%">
+                                                        </div>
+                                                        <div class="upload-button">
+                                                            <div class="file btn btn-lg btn-outline-info border-1 w-100">
+                                                                Upload Photo
+                                                                <input type="file" name="file" />
+                                                                <i class="fa-solid fa-upload"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-button">
+                                                            <button class="btn btn-primary w-100 my-lg-3">POST</button>
+                                                        </div>
+                                                </div> -->

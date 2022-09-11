@@ -36,6 +36,7 @@ public class JobDetailsController {
 	@PostMapping("/job")
 	public void addDetails(@RequestBody JobDetailsDomain jd)
 	{
+		
 		service.save(jd);
 	}
 	

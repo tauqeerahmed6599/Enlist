@@ -8,9 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <link rel="icon" type="image/x-icon" href="images/tab.png">
-    <title>Enlist - EditPage</title>
+    <title>Enlist - Overview</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,39 +23,6 @@
     <link href="css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/styles.css" rel="stylesheet">
-    
-    <script>
-    function addToDatabase(){
-    	var data={}
-    	
-    	data["jobtitle"]=$(".jobtitle").val();
-    	data["domain"]=$(".domain").val();
-    	data["jobtype"]=$(".jobtype").val();
-    	data["exprange"]=$(".exprange").val();
-    	data["salaryrange"]=$(".salaryrange").val();
-    	data["openpositions"]=$(".openpositions").val();
-    	data["joiningdate"]=$(".joiningdate").val();
-    	data["jobdesc"]=$(".jobdesc").val();
-    	data["assignedby"]=$(".assignedby").val();
-    	data["clientname"]=$(".clientname").val();
-    	data["jobresponsibilities"]=$(".jobresponsibilities").val();
-    	data["benefits"]=$(".benefits").val();
-    	
-    	$.ajax({
-    		url:"/job",
-    		contentType: "application/json",
-    		data: JSON.stringify(data),
-    		type: "post",
-    		success: function(data){
-    			alert("Added Successfully");
-    			window.location.href= '/JobInputScreen';
-    		},
-    		error: function(data){
-    			alert('error', e);
-    		}
-    	});
-    }
-    </script>
 
 </head>
 
@@ -72,7 +43,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Items -->
-            <li class="nav-item active">
+            <li class="nav-item ">
                 <a class="nav-link" href="./overview">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Overview</span></a>
@@ -285,140 +256,179 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <form>
-                            <div class="row">
-                                <div class="col-lg-6 pr-lg-4">
-                                    <div class="mb-3">
-                                        <label for="email">Job Title </label>
-                                        <input type="text" class="form-control jobtitle" id="email" placeholder="Java Developer">
-                                        <div class="invalid-feedback">
-                                            Please enter the title
-                                        </div>
-                                    </div>
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                      Employee can work remotely
-                                    </label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="domain">Domain</label>
-                                            <input type="text" class="form-control domain" id="domain" placeholder="Development"  required="">
-                                            <div class="invalid-feedback">
-                                                Valid Department is required.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Job type</label>
-                                                <select class="form-select" aria-label="Default select example">
-                                                     <option selected>-</option>
-                                                     <option value="Part-time">Part-Time</option>
-                                                     <option value="Full-time">Full-Time</option>
-                                                </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="experience">Experience Level</label>
-                                            <input type="text" class="form-control exprange" id="experience" placeholder="Mid Level"  required="">
-                                            <div class="invalid-feedback">
-                                                Valid Experience is required.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="jobtype">Salary Range</label>
-                                            <div class="d-flex align-content-center justify-content-center">
-                                                <input type="text" class="form-control" id="jobtype" placeholder="" value="">
-                                                <span class="mx-lg-2 d-flex align-items-center">to</span>
-                                                <input type="text" class="form-control" id="jobtype" placeholder="" value="">
-                                                <span class="d-flex align-items-center pl-2">LPA</span>
-                                            </div>
-                                            
+                        <div class="col-lg-8 col-sm-12 ">
+                            <h5 class="text-dark fw-bold">ACTIVE JOB INDENT</h5>
 
+                            <div class="table-content overview-detailed-table shadow ">
+                                <table class="table align-middle mb-0 bg-white rounded-lg">
+                                    <thead class="bg-body">
+                                        <tr>
+                                            <th>Role</th>
+                                            <th>Positions</th>
+                                            <th>Posted By</th>
+                                            <th>Assigned to</th>
+                                            <th>Progress</th>
 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Java Developer</td>
+                                            <td>100</td>
+                                            <td>John Smith</td>
+                                            <td>Suman</td>
+                                            <td>
+                                                <progress id="file1" class="overview-progress" value="30" max="100"> </progress>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Java Developer</td>
+                                            <td>100</td>
+                                            <td>John Smith</td>
+                                            <td>Suman</td>
+                                            <td><progress id="file1" class="overview-progress" value="70" max="100"> </progress></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Java Developer</td>
+                                            <td>100</td>
+                                            <td>John Smith</td>
+                                            <td>Suman</td>
+                                            <td><progress id="file1" class="overview-progress" value="15" max="100"> </progress></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Java Developer</td>
+                                            <td>100</td>
+                                            <td>John Smith</td>
+                                            <td>Suman</td>
+                                            <td><progress id="file1" class="overview-progress" value="60" max="100"> </progress></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <h5 class="text-dark fw-bold">NEWLY RECRUITED</h5>
+
+                            <div class="table-content overview-detailed-table shadow">
+                                <table class="table align-middle mb-0 bg-white">
+                                    <thead class="bg-body">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Role</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>David Mueller</td>
+                                            <td>Fullstack</td>
+                                        </tr>
+                                        <tr>
+                                            <td>David Mueller</td>
+                                            <td>Fullstack</td>
+                                        </tr>
+                                        <tr>
+                                            <td>David Mueller</td>
+                                            <td>Fullstack</td>
+                                        </tr>
+                                        <tr>
+                                            <td>David Mueller</td>
+                                            <td>Fullstack</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-lg-4">
+                        <div class="col-lg-8 col-sm-12">
+                            <h5 class="text-dark fw-bold">STATS</h5>
+                            <div class="card">
+                                <div class="card-body shadow">
+                                    <div class="pb-1">
+                                        <div class="my-2 mx-3 d-flex justify-content-end ">
+                                            <a href="" class="text-decoration-none text-gray-900">see more <i class="fa-solid fa-angle-right"></i></a>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="positions">No of Positions</label>
-                                            <input type="text" class="form-control openpositions" id="positions" placeholder="no of positions"  required="">
-                                        </div>
-                                         <!--  <div class="col-md-6 mb-3">
-                                            <label for="joining">Date of joining</label>
-                                            <div class="input-group date" id="datepicker">
-                                                <input type="text" class="form-control joiningdate" id="date" />
-                                                <span class="input-group-append">
-                                                    <span class="input-group-text bg-light d-block">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
-                                                </span>
+                                        <div class="row">
+                                            <div class="col text-center d-flex align-items-center justify-content-center">
+                                                <div class="justify-content-center">
+                                                    <div class="overview_java_donut">
+                                                        <div class="overview_java_donut_hole ">
+
+                                                        </div>
+                                                    </div>
+                                                    <p class="mt-3 mb-0 fw-bold">Java Developer</p>
+                                                </div>
+
                                             </div>
+                                            <div class="col text-center d-flex align-items-center justify-content-center">
+                                                <div class="justify-content-center">
+                                                    <div class="overview_web_donut">
+                                                        <div class="overview_web_donut_hole ">
 
-                                        </div> -->
-                                       <div class="col-md-6 mb-3">
-                                          <label for="joining">Date of joining</label>
-                                            <div class="input-group" id="joining">
-                                                <input type="date" title="Click on the icon" class="form-control w-100 joiningdate" id="joining-date">
+                                                        </div>
+                                                    </div>
+                                                    <p class="mt-3 mb-0 fw-bold">Web Developer</p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col  text-center d-flex align-items-center justify-content-center">
+                                                <div class="justify-content-center">
+                                                    <div class="overview_aws_donut">
+                                                        <div class="overview_aws_donut_hole ">
+
+                                                        </div>
+                                                    </div>
+                                                    <p class="mt-3 mb-0 fw-bold">Aws Developer</p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col align-items-end d-flex justify-content-center">
+                                                <div class="stats_graph">
+                                                    <div class="interview d-flex align-items-center mb-2">
+                                                        <div class="interview-box "></div>
+                                                        <span>Interview</span>
+                                                    </div>
+                                                    <div class="offered d-flex align-items-center mb-2">
+                                                        <div class="offered-box "></div>
+                                                        <span>Offered</span>
+                                                    </div>
+                                                    <div class="hired d-flex align-items-center mb-2">
+                                                        <div class="hired-box"></div>
+                                                        <span>Hired</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="desc">Description</label>
-                                        <textarea class="form-control jobdesc" id="desc" rows="5"></textarea>
-                                    </div>
-                                    <span><a href="./jobdescription" class="text-decoration-none text-dark">Choose from template -></a></span>
-
                                 </div>
-                                <div class="col-lg-6 px-lg-5">
-
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="mb-3">
-                                                <label>Assign to</label>
-                                                <select class="form-select assignedby" aria-label="Default select example">
-                                                     <option selected>Choose</option>
-                                                     <option value="Sai Babu">Sai Babu</option>
-                                                     <option value="Rashmi">Rashmi</option>
-                                                     <option value="Prakash">Prakash</option>
-                                                </select>
-                                            </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <h5 class="text-dark fw-bold">SCHEDULE</h5>
+                            <div class="card">
+                                <div class="card-body px-4 py-4 shadow">
+                                    <div class="overview-schedules">
+                                        <div class="my-2">
+                                            <h5 class="m-0">12, March</h5>
+                                            <a href="">Friday</a>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <!-- <label for="new-client">Client</label>
-                                            <input type="text" class="form-control" id="new-client" placeholder="Name of Client" required=""> -->
-                                            <div class="mb-3">
-                                                <label>Client</label>
-                                                <select class="form-select clientname" aria-label="Default select example">
-                                                     <option selected>Choose</option>
-                                                     <option value="Adobe">Adobe</option>
-                                                     <option value="JK Tyres">JK Tyres</option>
-                                                     <option value="Accion labs">Accion labs</option>
-                                                </select>
-                                            </div>
+                                        <div class="overview-meet d-flex align-items-center justify-content-between px-4 py-2 mb-3">
+                                            <div class="">Dizitalpods Meeting</div>
+                                            <div class="">12:56 pm</div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="responsibility">Job Responsibilities</label>
-                                        <textarea class="form-control jobresponsibilities" id="responsibility" rows="5"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="benefits">Benefits</label>
-                                        <textarea class="form-control benefits" id="benefits" rows="2"></textarea>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <button class="btn btn-primary px-3 py-2" onclick="addToDatabase();" px->SAVE</button>
+                                        <div class="overview-meet d-flex align-items-center justify-content-between px-4 py-2 mb-3">
+                                            <div class="">1st Round Interview</div>
+                                            <div class="">12:56 pm</div>
                                         </div>
-                                        <div class="col-lg-6  d-flex align-content-lg-center justify-content-end">
-                                            <span class="d-flex align-items-end"><a href="#" class="text-decoration-none text-dark">Post in other job portal -></a></span>
+                                        <div class="overview-meet d-flex align-items-center justify-content-between px-4 py-2 ">
+                                            <div class="">Interview</div>
+                                            <div class="">12:56 pm</div>
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
 
                 </div>
@@ -475,7 +485,7 @@
     <script src="js/jquery.easing.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Custom scripts for all pages-->
-   <!--  <script src="js/custom.js"></script> -->
+    <script src="js/custom.js"></script>
 
 </body>
 

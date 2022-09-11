@@ -23,6 +23,7 @@ public class JobDetailsDomain {
 	private String salaryrange;
 	private String openpositions;
 	private String jobresponsibilities;
+	private String joiningdate;
 	private String benefits;
 	private String joinedby;
 	private String createdby;
@@ -37,8 +38,8 @@ public class JobDetailsDomain {
 
 	public JobDetailsDomain(long jobid, String jobtitle, String domain, String rolename, String clientname,
 			String techskills, String exprange, String jobtype, String jobdesc, String salaryrange,
-			String openpositions, String jobresponsibilities, String benefits, String joinedby, String createdby,
-			String createdon, String assignedon, String assignedby) {
+			String openpositions, String jobresponsibilities, String joiningdate, String benefits, String joinedby,
+			String createdby, String createdon, String assignedon, String assignedby) {
 		super();
 		this.jobid = jobid;
 		this.jobtitle = jobtitle;
@@ -52,6 +53,7 @@ public class JobDetailsDomain {
 		this.salaryrange = salaryrange;
 		this.openpositions = openpositions;
 		this.jobresponsibilities = jobresponsibilities;
+		this.joiningdate = joiningdate;
 		this.benefits = benefits;
 		this.joinedby = joinedby;
 		this.createdby = createdby;
@@ -59,6 +61,8 @@ public class JobDetailsDomain {
 		this.assignedon = assignedon;
 		this.assignedby = assignedby;
 	}
+
+
 
 	public long getJobid() {
 		return jobid;
@@ -154,6 +158,14 @@ public class JobDetailsDomain {
 
 	public void setJobresponsibilities(String jobresponsibilities) {
 		this.jobresponsibilities = jobresponsibilities;
+	}
+	
+	public String getJoiningdate() {
+		return joiningdate;
+	}
+
+	public void setJoiningdate(String joiningdate) {
+		this.joiningdate = joiningdate;
 	}
 
 	public String getBenefits() {

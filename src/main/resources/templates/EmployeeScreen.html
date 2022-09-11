@@ -45,8 +45,7 @@
     			data:JSON.stringify(data),
     			type:"post",
     			success:function (data){
-    				
-    				window.location.href='/EmployeeScreen';
+    				window.location.href ='/EmployeeScreen';
     				alert("Added to Database Successfully");
     			},
     			error:function(e){
@@ -81,29 +80,48 @@
     	jQuery.each(data, function(i, val){
     		var tablerow="<tr class ='text-center'>"
     						+"<td>" + val.employeename +"</td>"
-    						+"<td>" + val.eid +"</td>"
+    						+"<td><button class='btn btn-light' onclick='getUpdateInfo("+val.eid+"); '> "+ val.eid +" </button></td>"
     						+"<td>" + val.email +"</td>"
     						+"</tr>";
     		$("#tbody").append(tablerow);
     	});
     }
+    
+    function getUpdateInfo(id){
+    	$.get("/employee/" + id,function(data){
+    		console.log(data);
+    		$('.employeename1').val(data.employeename);
+    		$('.eid1').val(data.eid);
+    		$('.designation1').val(data.designation);
+    		$('.email1').val(data.email);
+    		$('.username1').val(data.username);
+    		$('.password1').val(data.password);
+    		$('.confirmpassword1').val(data.confirmpassword);
+    	});
+    }
+    
+    function getInfo(){
+        var search=$(".search").val();
+        $.ajax(
+        	{
+        		url:"/employee/"+search,
+        		success:function(data)
+        		{
+        			console.log("search data");
+        			var employee='';
+        			employee+='<tr class="text-center">';
+        			employee+='<td>'+data.employeename+'</td>';
+        			employee+='<td><button type="button" class="btn btn-light"  onclick="getUpdateInfo('+data.eid+');">'+data.eid+'</button></td>';
+        			employee+='<td>'+data.email+'</td>';
+        			
+        			 $('#tbody').html( employee);
+        		},
+        		type:'GET' 
+        	});
+        }
+    
     </script>
     
-    <script>
-    $('.search_field').keyup(function(){
-    	var data =$('.search_field').val();
-    	$.ajax({
-    		url: "/employee",
-    		type: "GET",
-    		cache: false,
-    		data: data,
-    		success: function(data){
-    			$('.search-results').append(data);
-    		}
-    	});
-    });
-    </script>
-
 </head>
 
 <body id="page-top">
@@ -124,22 +142,22 @@
 
             <!-- Nav Items -->
             <li class="nav-item active">
-                <a class="nav-link" href="../pages/overview.html">
+                <a class="nav-link" href="./overview">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Overview</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./Inbox.html">
+                <a class="nav-link" href="./Inbox">
                     <i class="fas fa-inbox"></i>
                     <span>Inbox</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./calendar.html">
+                <a class="nav-link" href="./calendar">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Calendar</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./Jobposting.html">
+                <a class="nav-link" href="./Jobposting">
                     <i class="fab fa-linkedin"></i>
                     <span>Social Media</span></a>
             </li>
@@ -154,17 +172,17 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="../index.html">
+                <a class="nav-link" href="./index">
                     <i class="fas fa-mail-bulk"></i>
                     <span>Job Indent</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./candidates.html">
+                <a class="nav-link" href="./CandidateDisplayScreen">
                     <i class="fas fa-user-alt"></i>
                     <span>Candidates</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./Referralpage.html">
+                <a class="nav-link" href="./ReferralScreen">
                     <i class="fas fa-external-link-alt"></i>
                     <span>Referrals</span></a>
             </li>
@@ -179,17 +197,17 @@
             <!-- Nav Item -->
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="../pages/employee.html">
+                <a class="nav-link" href="./EmployeeScreen">
                     <i class="fas fa-users"></i>
                     <span>Employee</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="./RoleScreen">
                     <i class="fas fa-project-diagram"></i>
                     <span>Roles</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../pages/client.html">
+                <a class="nav-link" href="./ClientScreen">
                     <i class="far fa-clock"></i>
                     <span>Clients</span></a>
             </li>
@@ -344,21 +362,21 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="employee_name" class="fw-bold">Employee Name</label>
-                                            <input type="text" class="form-control bg-body border-0 text-dark employeename" id="employee_name" placeholder="Name" required="">
+                                            <input type="text" class="form-control bg-body border-0 text-dark employeename employeename1" id="employee_name" placeholder="Name" required="">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="employee_id" class="fw-bold">Employee ID</label>
-                                            <input type="text" class="form-control bg-body border-0 eid" id="employee_id" placeholder="ID">
+                                            <input type="text" class="form-control bg-body border-0 eid eid1" id="employee_id" placeholder="ID">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="employee_designation" class="fw-bold">Designation</label>
-                                            <input type="text" class="form-control bg-body border-0 text-dark designation" id="employee_designation" placeholder="Designation" required="">
+                                            <input type="text" class="form-control bg-body border-0 text-dark designation designation1" id="employee_designation" placeholder="Designation" required="">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="employee_email" class="fw-bold">Email</label>
-                                            <input type="email" class="form-control bg-body border-0 email" id="employee_email" placeholder="Email" required="">
+                                            <input type="email" class="form-control bg-body border-0 email email1" id="employee_email" placeholder="Email" required="">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -368,41 +386,46 @@
                                                         
                                                         <option value="0">Select Roles</option>
                                                         <option value="1">Java Fullstack-Adobe</option>
-                                                        <option value="2">Java Fullstack-Adobe</option>
+                                                        <option value="2">AEM Developer - Adobe</option>
                                                       </select>
                                           <!--   <label for="employee_role" class="fw-bold">Role</label>
                                             <input type="text" class="form-control bg-body border-0 text-dark" id="employee_role" placeholder="Role" > -->
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="employee_username" class="fw-bold">username</label>
-                                            <input type="text" class="form-control bg-body border-0 username" id="employee_username" placeholder="username" required="">
+                                            <input type="text" class="form-control bg-body border-0 username username1" id="employee_username" placeholder="username" required="">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="employee_createpassword" class="fw-bold">Create Password</label>
-                                            <input type="password" class="form-control bg-body border-0 text-dark password" id="employee_createpassword" placeholder="Password" required="">
+                                            <input type="password" class="form-control bg-body border-0 text-dark password password1" id="employee_createpassword" placeholder="Password" required="">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="employee_confirmpassword" class="fw-bold">Confirm Password</label>
-                                            <input type="password" class="form-control bg-body border-0 confirmpassword" id="employee_confirmpassword" placeholder="Confirm Password" required="">
+                                            <input type="password" class="form-control bg-body border-0 confirmpassword confirmpassword1" id="employee_confirmpassword" placeholder="Confirm Password" required="">
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <button class="btn btn-primary fw-bold" onclick="save()">ADD TO DATABASE</button>
+                                        <button class="btn btn-primary fw-bold" onclick="save()">SAVE</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <label for="employee_search" class="fw-bold">All Employees</label>
-                                        <div class="d-flex form-inputs">
-                                            <input class="form-control bg-gray-300 border-0" type="text" placeholder="Search candidates">
-                                            <i class="fa-solid fa-magnifying-glass position-absolute top-10 end-0 mr-4 mt-2"></i>
+                            <div class="row">
+                         
+                            <div class="col-12">
+                                    <label for="employee_search" class="fw-bold">All Employees</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small bg-gray-300 search" placeholder="Search for..." id="">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary" type="button" onclick ="getInfo();">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    </div>
                                 <div class="table-content mt-4 overflow-auto employee-table-content">
                                     <table class="table align-middle mb-0 bg-white employee-table-head shadow ">
                                         <thead class="bg-body position-sticky top-0 ">
@@ -483,6 +506,8 @@
                                     </table>
                                 </div>
                             </div>
+                            </div>
+                          
                         </div>
                     </div>
                     <!-- /.container-fluid -->

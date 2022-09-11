@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <link rel="icon" type="image/x-icon" href="images/tab.png">
-    <title>Enlist - EmployeePage</title>
+    <title>Enlist - RolePage</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
@@ -40,7 +40,7 @@
 		 data: JSON.stringify(data),
 		 type: "POST",
 		 success: function(data){
-			 windows.location.href = '/RoleScreen';
+			 window.location.href = "/RoleScreen";
 			 alert("Added to Database Successfully" + data);
 		 },
 		 error: function (e){
@@ -72,55 +72,44 @@
     
     function BindDataWithJqueryEach(data)
     {
-    	jQuery.each(data, function(i, val){
+    	jQuery.each(data, function(i, data){
     		var tablerow="<tr class ='text-center'>"
-    						+"<td>" + val.roleid +"</td>"
-    						+"<td>" + val.rolename +"</td>"
+    						+"<td>" + data.rolename +"</td>"
+    						/* +'<td><button class="btn btn-light" data-toggle="modal" data-target="#updateModal" onclick="getUpdateInfo('+value.roleid+');">'+value.roleid+'</button></td>'; */
+    						+"<td><button class='btn btn-light' onclick='getUpdateInfo("+data.roleid+"); '> "+ data.roleid +" </button></td>" ;
     						+"</tr>";
     		$("#tbody").append(tablerow);
     	});
     }
+    
+    function getUpdateInfo(id){
+    	$.get("/role/" + id,function(data){
+    		console.log(data);
+    		$('.roleid2').val(data.roleid);
+    		$('.rolename2').val(data.rolename);
+    	});
+    }
+    
+    function getInfo(){
+    var search=$(".search").val();
+    $.ajax(
+    	{
+    		url:"/role/"+search,
+    		success:function(data)
+    		{
+    			console.log("search data");
+    			var role='';
+    			role+='<tr class="text-center">';
+    			role+='<td>'+data.rolename+'</td>';
+    			role+='<td><button type="button" class="btn btn-light"  onclick="getUpdateInfo('+data.roleid+');">'+data.roleid+'</button></td>';
+    			
+    			 $('#tbody').html( role);
+    		},
+    		type:'GET' 
+    	});
+    }
     </script>
-<!-- <script type="text/javascript">
-$(document).ready(function(){
-$("#client_search").keyup(function(){
- $.ajax({
- 		type: "GET",
- 		url: "/role",
- 		data: 'keyword=' + $(this).val(),
- 	    
- 	    success: function(data){
- 	    $("#suggestion-box").show();
- 	    $("#suggestion-box").html(data);
- 	    }
- });
-});
-});
-function selectRole(val){
-	$("#client_search").val(val);
-	$("#suggestion-box").hide();
-}
-
-</script> -->
-
-<!-- <script>
-$(document).ready(function(){
-	$('#search').keyup(function(){
-		$('#result').html(' ');
-		var searchField = $('#search').val();
-		var expression = new RegExp(searchField, "i");
-		$.getJSON('data.json', function(data){
-			$.each(data, function(key, value){
-				if(value.name.search(expression) != -1 || value.location.search(expression) != -1)
-					{
-					$('#result').append('<li class="list-group-item"> '+ value.rolename +'</li>')
-					}
-			});
-		});
-	});
-});
-
-</script> -->
+    
 
 </head>
 
@@ -142,22 +131,22 @@ $(document).ready(function(){
 
             <!-- Nav Items -->
             <li class="nav-item active">
-                <a class="nav-link" href="../pages/overview.html">
+                <a class="nav-link" href="./overview">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Overview</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./Inbox.html">
+                <a class="nav-link" href="./Inbox">
                     <i class="fas fa-inbox"></i>
                     <span>Inbox</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./calendar.html">
+                <a class="nav-link" href="./calendar">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Calendar</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./Jobposting.html">
+                <a class="nav-link" href="./Jobposting">
                     <i class="fab fa-linkedin"></i>
                     <span>Social Media</span></a>
             </li>
@@ -172,17 +161,17 @@ $(document).ready(function(){
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="../index.html">
+                <a class="nav-link" href="./index">
                     <i class="fas fa-mail-bulk"></i>
                     <span>Job Indent</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./candidates.html">
+                <a class="nav-link" href="./CandidateDisplayScreen">
                     <i class="fas fa-user-alt"></i>
                     <span>Candidates</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./Referralpage.html">
+                <a class="nav-link" href="./ReferralScreen">
                     <i class="fas fa-external-link-alt"></i>
                     <span>Referrals</span></a>
             </li>
@@ -197,17 +186,17 @@ $(document).ready(function(){
             <!-- Nav Item -->
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="../pages/employee.html">
+                <a class="nav-link" href="./EmployeeScreen">
                     <i class="fas fa-users"></i>
                     <span>Employee</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../pages/role.html">
+                <a class="nav-link" href="./RoleScreen">
                     <i class="fas fa-project-diagram"></i>
                     <span>Roles</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../pages/client.html">
+                <a class="nav-link" href="./ClientScreen">
                     <i class="far fa-clock"></i>
                     <span>Clients</span></a>
             </li>
@@ -362,11 +351,11 @@ $(document).ready(function(){
                                     <div class="row">
                                     <div class="col-md-6 mb-3">
                                             <label for="role_id" class="fw-bold">Role ID</label>
-                                            <input type="text" class="form-control bg-body border-0 roleid" id="role_id" placeholder="ID" required="">
+                                            <input type="text" class="form-control bg-body border-0 roleid roleid1 roleid2" id="role_id" placeholder="ID" readonly required="">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="role_name" class="fw-bold">Role Name</label>
-                                            <input type="text" class="form-control bg-body border-0 text-dark rolename" id="role_name" placeholder="Name" required="">
+                                            <input type="text" class="form-control bg-body border-0 text-dark rolename rolename1 rolename2" id="role_name" placeholder="Name" required="">
                                         </div>
                                     </div>
                                     <!-- <div class="row">
@@ -392,23 +381,25 @@ $(document).ready(function(){
                                         </div>
                                     </div> -->
                                     <div class="mt-3">
-                                        <button class="btn btn-primary fw-bold" onclick="save();">ADD TO DATABASE</button>
+                                        <button class="btn btn-primary fw-bold" onclick="save();">SAVE</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="col-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <label for="client_search" class="fw-bold">All Roles</label>
-                                        <div class="d-flex form-inputs">
-                                            <input class="form-control bg-gray-300 border-0" id="client_search" onkeyup="role_search()" type="text" placeholder="Search">
-                                            <i class="fa-solid fa-magnifying-glass position-absolute top-10 end-0 mr-4 mt-2"></i>
-                                            <!-- <div id="suggestion-box"></div> -->
-                                            <!-- <ul class="list-group" id="result"></ul> -->
-                                            <div class="search-result"></div>
+                            <div class="row">
+                           <div class="col-12">
+                                        <label for="role_search" class="fw-bold">All Employees Roles</label>
+                                        
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small bg-gray-300 search" placeholder="Search for..." id="">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary" type="button" onclick="getInfo();">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    </div>
                                 <div class="table-content mt-4 overflow-auto client-table-content">
                                     <table class="table align-middle mb-0 bg-white client-table-head shadow">
                                         <thead class="bg-body position-sticky top-0 ">
@@ -464,6 +455,7 @@ $(document).ready(function(){
                                         </tbody> -->
                                     </table>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
